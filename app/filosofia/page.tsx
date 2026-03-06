@@ -2,9 +2,18 @@ import type { Metadata } from "next"
 import { SitePageShell } from "@/components/site-page-shell"
 
 export const metadata: Metadata = {
-  title: "Filosofía | Ventrion Labs",
+  title: "Filosofía",
   description:
     "La filosofía de trabajo de Ventrion Labs: software sobrio, decisiones claras y foco en impacto operacional.",
+  alternates: {
+    canonical: "/filosofia",
+  },
+  openGraph: {
+    title: "Filosofía | Ventrion Labs",
+    description:
+      "La filosofía de trabajo de Ventrion Labs: software sobrio, decisiones claras y foco en impacto operacional.",
+    url: "/filosofia",
+  },
 }
 
 export default function FilosofiaPage() {

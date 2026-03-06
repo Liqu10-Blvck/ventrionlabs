@@ -19,12 +19,21 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 const siteUrl = getSiteUrl()
+const defaultTitle = "Ventrion Labs | Software para la excelencia operativa"
+const defaultDescription =
+  "Ventrion Labs diseña software, sistemas internos y productos digitales para ordenar procesos, mejorar control operacional y escalar negocios reales."
+const defaultOgImage = `${siteUrl}/ventrionlabsblack.png`
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Ventrion Labs - Software para la Excelencia Operativa",
-  description:
-    "Ventrion Labs construye soluciones SaaS verticales diseñadas para optimizar, controlar y escalar negocios reales.",
+  title: {
+    default: defaultTitle,
+    template: "%s | Ventrion Labs",
+  },
+  description: defaultDescription,
+  applicationName: "Ventrion Labs",
+  category: "technology",
+  referrer: "origin-when-cross-origin",
   alternates: {
     canonical: "/",
   },
@@ -45,24 +54,20 @@ export const metadata: Metadata = {
     locale: "es_CL",
     url: siteUrl,
     siteName: "Ventrion Labs",
-    title: "Ventrion Labs - Software para la Excelencia Operativa",
-    description:
-      "Ventrion Labs construye soluciones SaaS verticales diseñadas para optimizar, controlar y escalar negocios reales.",
+    title: defaultTitle,
+    description: defaultDescription,
     images: [
       {
-        url: "/ventrionlabsblack.png",
-        width: 1024,
-        height: 341,
+        url: defaultOgImage,
         alt: "Ventrion Labs",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ventrion Labs - Software para la Excelencia Operativa",
-    description:
-      "Ventrion Labs construye soluciones SaaS verticales diseñadas para optimizar, controlar y escalar negocios reales.",
-    images: ["/ventrionlabsblack.png"],
+    title: defaultTitle,
+    description: defaultDescription,
+    images: [defaultOgImage],
   },
   robots: {
     index: true,
@@ -87,7 +92,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="es" suppressHydrationWarning>
+    <html lang="es-CL" suppressHydrationWarning>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}
       >

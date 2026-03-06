@@ -2,9 +2,18 @@ import type { Metadata } from "next"
 import { SitePageShell } from "@/components/site-page-shell"
 
 export const metadata: Metadata = {
-  title: "Nosotros | Ventrion Labs",
+  title: "Nosotros",
   description:
     "Conoce a Ventrion Labs, nuestro enfoque de trabajo y cómo construimos infraestructura digital para empresas en crecimiento.",
+  alternates: {
+    canonical: "/nosotros",
+  },
+  openGraph: {
+    title: "Nosotros | Ventrion Labs",
+    description:
+      "Conoce a Ventrion Labs, nuestro enfoque de trabajo y cómo construimos infraestructura digital para empresas en crecimiento.",
+    url: "/nosotros",
+  },
 }
 
 export default function NosotrosPage() {

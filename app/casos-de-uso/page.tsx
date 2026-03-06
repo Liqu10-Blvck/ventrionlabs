@@ -2,9 +2,18 @@ import type { Metadata } from "next"
 import { SitePageShell } from "@/components/site-page-shell"
 
 export const metadata: Metadata = {
-  title: "Casos de uso | Ventrion Labs",
+  title: "Casos de uso",
   description:
     "Escenarios típicos donde Ventrion Labs aporta valor: sistemas internos, automatización y productos para operaciones reales.",
+  alternates: {
+    canonical: "/casos-de-uso",
+  },
+  openGraph: {
+    title: "Casos de uso | Ventrion Labs",
+    description:
+      "Escenarios típicos donde Ventrion Labs aporta valor: sistemas internos, automatización y productos para operaciones reales.",
+    url: "/casos-de-uso",
+  },
 }
 
 export default function CasosDeUsoPage() {

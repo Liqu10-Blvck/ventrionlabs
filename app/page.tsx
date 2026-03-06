@@ -13,10 +13,25 @@ import { AnimatedSection } from "@/components/animated-section"
 import { Footer } from "@/components/footer"
 
 const siteUrl = (process.env.SITE_URL?.trim() || "http://localhost:3000").replace(/\/$/, "")
+const pageTitle = "Software para ordenar operaciones y escalar con claridad"
+const pageDescription =
+  "Ventrion Labs ayuda a empresas a ordenar procesos, centralizar información y construir sistemas más claros para crecer con control operacional."
 
 export const metadata: Metadata = {
+  title: pageTitle,
+  description: pageDescription,
   alternates: {
     canonical: "/",
+  },
+  openGraph: {
+    title: pageTitle,
+    description: pageDescription,
+    url: siteUrl,
+    type: "website",
+  },
+  twitter: {
+    title: pageTitle,
+    description: pageDescription,
   },
 }
 
@@ -28,14 +43,32 @@ export default function Home() {
         "@type": "Organization",
         name: "Ventrion Labs",
         url: siteUrl,
-        logo: `${siteUrl}/web-app-manifest-512x512.png`,
+        logo: `${siteUrl}/ventrionblack.png`,
         email: "contacto@ventrionlabs.cl",
+        description: pageDescription,
+      },
+      {
+        "@type": "WebPage",
+        name: pageTitle,
+        url: siteUrl,
+        isPartOf: {
+          "@type": "WebSite",
+          name: "Ventrion Labs",
+          url: siteUrl,
+        },
+        about: {
+          "@type": "Organization",
+          name: "Ventrion Labs",
+        },
+        description: pageDescription,
+        inLanguage: "es-CL",
       },
       {
         "@type": "WebSite",
         name: "Ventrion Labs",
         url: siteUrl,
         inLanguage: "es-CL",
+        description: pageDescription,
       },
     ],
   }
