@@ -6,6 +6,7 @@ import { WhatWeDoSection } from "@/components/what-we-do-section"
 import { ValuesSection } from "@/components/values-section"
 import { HowWeWorkSection } from "@/components/how-we-work-section"
 import { ProductsSection } from "@/components/products-section"
+import { TrustSection } from "@/components/trust-section"
 import { FinalCtaSection } from "@/components/final-cta-section"
 import { ContactSection } from "@/components/contact-section"
 import { AnimatedSection } from "@/components/animated-section"
@@ -52,15 +53,11 @@ export default function Home() {
         </AnimatedSection>
 
         <AnimatedSection>
-          <ProblemsSection />
-        </AnimatedSection>
-
-        <AnimatedSection>
           <WhatWeDoSection />
         </AnimatedSection>
 
         <AnimatedSection>
-          <ValuesSection />
+          <ProblemsSection />
         </AnimatedSection>
 
         <AnimatedSection>
@@ -69,6 +66,14 @@ export default function Home() {
 
         <AnimatedSection>
           <ProductsSection />
+        </AnimatedSection>
+
+        <AnimatedSection>
+          <TrustSection />
+        </AnimatedSection>
+
+        <AnimatedSection>
+          <ValuesSection />
         </AnimatedSection>
 
         <AnimatedSection>

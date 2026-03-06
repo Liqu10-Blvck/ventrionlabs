@@ -21,7 +21,7 @@ import { toast } from "@/hooks/use-toast"
 const contactSchema = z.object({
   fullName: z.string().min(2, "Ingresa tu nombre"),
   email: z.string().email("Ingresa un email válido"),
-  company: z.string().min(2, "Ingresa tu empresa"),
+  company: z.string().optional(),
   message: z.string().min(10, "Cuéntanos un poco más"),
 })
 
@@ -85,23 +85,24 @@ export function ContactSection() {
             Hablemos de tu operación
           </h2>
           <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-            Cuéntanos qué necesitas y te respondemos con una propuesta concreta.
+            Cuéntanos qué estás intentando ordenar, digitalizar o escalar. Te
+            responderemos con una conversación inicial y un siguiente paso claro.
           </p>
 
-          <div className="mt-8 overflow-hidden rounded-2xl border border-border bg-background/60 shadow-sm sm:mt-10">
+          <div className="futuristic-panel mt-8 overflow-hidden rounded-2xl border border-border bg-background/70 shadow-sm sm:mt-10">
             <div className="grid gap-1 px-5 py-4 sm:px-6 sm:py-5">
               <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
                 Información
               </p>
               <p className="text-sm text-muted-foreground">
-                Respuesta en horario hábil.
+                Respuesta inicial dentro de 1 día hábil.
               </p>
             </div>
             <div className="grid divide-y divide-border">
               <div className="px-5 py-4 sm:px-6">
                 <p className="text-sm font-medium text-foreground">Email</p>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  contacto@ventrionlabs.cl
+                  Disponible por formulario y configuración de correo transaccional
                 </p>
               </div>
               <div className="px-5 py-4 sm:px-6">
@@ -114,7 +115,7 @@ export function ContactSection() {
           </div>
         </div>
 
-        <div className="rounded-2xl border border-border bg-background/60 p-5 shadow-sm sm:p-6">
+        <div className="futuristic-panel animate-pulse-glow rounded-2xl border border-border bg-background/70 p-5 shadow-sm sm:p-6">
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
@@ -160,9 +161,9 @@ export function ContactSection() {
                 name="company"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Empresa</FormLabel>
+                    <FormLabel>Empresa (opcional)</FormLabel>
                     <FormControl>
-                      <Input autoComplete="organization" placeholder="Tu empresa" {...field} />
+                      <Input autoComplete="organization" placeholder="Tu empresa" {...field} value={field.value ?? ""} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -189,15 +190,15 @@ export function ContactSection() {
 
               <div className="grid gap-3 sm:flex sm:items-center sm:justify-between">
                 <p className="text-xs leading-relaxed text-muted-foreground">
-                  Al enviar este formulario aceptas ser contactado por nuestro equipo.
+                  Al enviar este formulario aceptas ser contactado por nuestro equipo para continuar la conversación.
                 </p>
                 <Button
                   type="submit"
                   size="lg"
                   disabled={isSubmitting}
-                  className="w-full sm:w-auto"
+                  className="motion-safe-lift w-full sm:w-auto"
                 >
-                  {isSubmitting ? "Enviando..." : "Enviar"}
+                  {isSubmitting ? "Enviando..." : "Solicitar conversación"}
                 </Button>
               </div>
             </form>

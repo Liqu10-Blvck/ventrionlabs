@@ -4,7 +4,7 @@ import { z } from "zod"
 const contactSchema = z.object({
   fullName: z.string().min(2),
   email: z.string().email(),
-  company: z.string().min(2),
+  company: z.string().optional(),
   message: z.string().min(10),
 })
 
@@ -22,13 +22,14 @@ function buildContactEmailHtml(data: z.infer<typeof contactSchema>) {
     dateStyle: "medium",
     timeStyle: "short",
   })
+  const companyLabel = data.company?.trim() || "No informado"
 
   return `
     <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #111827;">
       <h1 style="margin-bottom: 16px; font-size: 20px;">Nuevo contacto desde ventrionlabs.cl</h1>
       <p style="margin: 0 0 8px;"><strong>Nombre:</strong> ${data.fullName}</p>
       <p style="margin: 0 0 8px;"><strong>Email:</strong> ${data.email}</p>
-      <p style="margin: 0 0 8px;"><strong>Empresa:</strong> ${data.company}</p>
+      <p style="margin: 0 0 8px;"><strong>Empresa:</strong> ${companyLabel}</p>
       <p style="margin: 0 0 8px;"><strong>Fecha:</strong> ${submittedAt}</p>
       <div style="margin-top: 24px;">
         <p style="margin: 0 0 8px;"><strong>Mensaje:</strong></p>
@@ -40,6 +41,7 @@ function buildContactEmailHtml(data: z.infer<typeof contactSchema>) {
 
 async function sendContactEmail(data: z.infer<typeof contactSchema>) {
   const { apiKey, fromEmail, toEmail } = getContactMailConfig()
+  const companyLabel = data.company?.trim() || "No informado"
 
   if (!apiKey) {
     throw new Error("Missing RESEND_API_KEY")
@@ -59,12 +61,12 @@ async function sendContactEmail(data: z.infer<typeof contactSchema>) {
       from: fromEmail,
       to: [toEmail],
       reply_to: data.email,
-      subject: `Nuevo contacto web: ${data.fullName} - ${data.company}`,
+      subject: `Nuevo contacto web: ${data.fullName} - ${companyLabel}`,
       text: [
         "Nuevo contacto desde ventrionlabs.cl",
         `Nombre: ${data.fullName}`,
         `Email: ${data.email}`,
-        `Empresa: ${data.company}`,
+        `Empresa: ${companyLabel}`,
         "",
         "Mensaje:",
         data.message,

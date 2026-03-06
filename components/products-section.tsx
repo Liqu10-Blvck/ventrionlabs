@@ -24,7 +24,24 @@ const iconByProductCode: Record<string, typeof ShoppingCart> = {
   fruitpos: ShoppingCart,
   barberos: Scissors,
   educontrol: GraduationCap,
-  demo: ShoppingCart,
+}
+
+const productAudienceByCode: Record<string, string> = {
+  fruitpos: "Retail y comercio",
+  barberos: "Servicios y agenda",
+  educontrol: "Educación y control interno",
+}
+
+const productSummaryByCode: Record<string, string> = {
+  fruitpos: "Ordena ventas, catálogo, inventario y operación diaria desde un solo sistema.",
+  barberos: "Centraliza reservas, atención, clientes y seguimiento operativo del negocio.",
+  educontrol: "Mejora control administrativo, procesos internos y visibilidad de información crítica.",
+}
+
+const productUseCaseByCode: Record<string, string> = {
+  fruitpos: "Ideal para puntos de venta que necesitan ordenar caja, inventario y operación diaria.",
+  barberos: "Ideal para negocios con reservas, atención recurrente y gestión de clientes.",
+  educontrol: "Ideal para instituciones que requieren control administrativo y trazabilidad interna.",
 }
 
 function formatPrice(amount: string, currency: string) {
@@ -82,6 +99,8 @@ export async function ProductsSection() {
     productCodes = getPublicLandingProductCodes()
   }
 
+  productCodes = productCodes.filter((code) => code.toLowerCase() !== "demo")
+
   const catalogs = await Promise.all(
     productCodes.map(async (code) => {
       try {
@@ -97,6 +116,8 @@ export async function ProductsSection() {
     }),
   )
 
+  const visibleCatalogs = catalogs.filter((catalog) => catalog.code.toLowerCase() !== "demo")
+
   return (
     <section id="productos" className="bg-secondary/50 px-6 py-20 sm:py-24 md:py-32">
       <div className="mx-auto max-w-6xl">
@@ -105,24 +126,24 @@ export async function ProductsSection() {
             Productos
           </p>
           <h2 className="text-balance text-2xl font-semibold tracking-tight text-foreground sm:text-3xl md:text-4xl">
-            Productos diseñados para operaciones reales
+            Productos presentados como soluciones, no como fichas técnicas
           </h2>
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-            Soluciones verticales pensadas para estandarizar procesos, mejorar el
-            control y sostener el crecimiento. Aquí mostramos los productos
-            disponibles y sus módulos destacados.
+            Cada producto está orientado a un tipo de operación concreto y busca
+            resolver un problema real con más orden, visibilidad y continuidad.
           </p>
         </div>
 
         <div className="grid gap-4 sm:gap-6 md:grid-cols-3">
-          {catalogs.map((catalog) => (
+          {visibleCatalogs.map((catalog, index) => (
             <Card
               key={catalog.code}
-              className="group flex flex-col border-border bg-background transition-all duration-300 hover:border-foreground/20 hover:shadow-lg"
+              className="futuristic-panel motion-safe-lift group flex flex-col border-border bg-background/85 shadow-sm transition-all duration-300 hover:border-foreground/20 hover:shadow-2xl"
+              style={{ animationDelay: `${index * 120}ms` }}
             >
               <CardHeader className="flex-1">
                 <div className="mb-4 flex items-center justify-between">
-                  <div className="flex size-11 items-center justify-center rounded-xl bg-secondary text-foreground transition-colors duration-300 group-hover:bg-foreground group-hover:text-background">
+                  <div className="animate-pulse-glow flex size-11 items-center justify-center rounded-xl bg-secondary text-foreground transition-colors duration-300 group-hover:bg-foreground group-hover:text-background">
                     {(() => {
                       const Icon =
                         iconByProductCode[catalog.code.toLowerCase()] ??
@@ -131,10 +152,10 @@ export async function ProductsSection() {
                     })()}
                   </div>
                   <Badge
-                    variant={catalog.ok ? "secondary" : "outline"}
-                    className="text-xs"
+                    variant="secondary"
+                    className="animate-border-beam text-xs"
                   >
-                    {catalog.ok ? "Disponible" : "Error"}
+                    {productAudienceByCode[catalog.code.toLowerCase()] ?? "Solución vertical"}
                   </Badge>
                 </div>
                 <CardTitle className="flex items-center gap-2 text-xl text-foreground">
@@ -143,14 +164,21 @@ export async function ProductsSection() {
                     : catalog.code}
                   <ArrowUpRight className="size-4 text-muted-foreground opacity-0 transition-all duration-200 group-hover:opacity-100" />
                 </CardTitle>
-                <CardDescription className="text-xs font-medium text-muted-foreground">
+                <CardDescription className="text-sm leading-relaxed text-muted-foreground">
                   {catalog.ok
-                    ? `Código: ${catalog.data.product.code}`
-                    : "No se pudo cargar desde la API"}
+                    ? productSummaryByCode[catalog.code.toLowerCase()] ??
+                      "Producto diseñado para resolver procesos críticos con más orden y trazabilidad."
+                    : "Esta solución puede configurarse según la necesidad operativa del negocio."}
                 </CardDescription>
+                {catalog.ok ? (
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {productUseCaseByCode[catalog.code.toLowerCase()] ??
+                      "Ideal para operaciones que requieren más control, trazabilidad y estandarización."}
+                  </p>
+                ) : null}
                 {!catalog.ok ? (
                   <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                    {catalog.error}
+                    No pudimos cargar el detalle completo en este momento, pero la solución sigue disponible para evaluación comercial.
                   </p>
                 ) : null}
               </CardHeader>
@@ -165,17 +193,17 @@ export async function ProductsSection() {
                           <>
                             <div className="flex items-center justify-between gap-3">
                               <p className="text-sm font-medium text-muted-foreground">
-                                {startingPrice ? "Desde" : "Planes"}
+                                {startingPrice ? "Desde" : "Configuración"}
                               </p>
                               <p className="text-sm font-semibold text-foreground">
-                                {startingPrice ?? `${catalog.data.plans.length} opciones`}
+                                {startingPrice ?? `${catalog.data.plans.length} alternativas`}
                               </p>
                             </div>
 
                             {modules.length > 0 ? (
                               <div className="grid gap-2">
                                 <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                                  Módulos destacados
+                                  Capacidades clave
                                 </p>
                                 <div className="flex flex-wrap gap-2">
                                   {modules.map((m) => (
@@ -191,23 +219,14 @@ export async function ProductsSection() {
                               </div>
                             ) : null}
 
-                            <Button size="sm" className="w-full" asChild>
-                              <a href="#contacto">Solicitar prueba</a>
+                            <Button size="sm" className="motion-safe-lift w-full" asChild>
+                              <a href="#contacto">Solicitar demo</a>
                             </Button>
                           </>
                         )
                       })()}
                     </div>
                   ) : null}
-                </div>
-                <div className="mt-5">
-                  <a
-                    href="#contacto"
-                    className="inline-flex items-center gap-1 text-sm font-medium text-foreground transition-colors group-hover:underline"
-                  >
-                    {"Solicitar prueba"}
-                    <ArrowUpRight className="size-3.5" />
-                  </a>
                 </div>
               </CardContent>
             </Card>

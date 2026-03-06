@@ -49,6 +49,8 @@ export type PublicLandingProductCatalogResponse = {
   founder?: PublicLandingFounderInfo
 }
 
+const excludedProductCodes = new Set(["demo"])
+
 const fallbackProductCatalogs: Record<string, PublicLandingProductCatalogResponse> = {
   fruitpos: {
     product: {
@@ -125,37 +127,19 @@ const fallbackProductCatalogs: Record<string, PublicLandingProductCatalogRespons
       },
     ],
   },
-  demo: {
-    product: {
-      code: "demo",
-      name: "Demo Product",
-    },
-    plans: [
-      {
-        code: "base",
-        name: "Base",
-        prices: [
-          {
-            currency: "CLP",
-            interval: "mes",
-            amount: "19990",
-            is_active: true,
-          },
-        ],
-        modules: [
-          { code: "dashboard", name: "Dashboard" },
-          { code: "analytics", name: "Analítica" },
-        ],
-      },
-    ],
-  },
 }
 
 function getFallbackProducts() {
-  return Object.values(fallbackProductCatalogs).map(({ product }) => product)
+  return Object.values(fallbackProductCatalogs)
+    .map(({ product }) => product)
+    .filter((product) => !excludedProductCodes.has(product.code.toLowerCase()))
 }
 
 function getFallbackProductCatalog(productCode: string) {
+  if (excludedProductCodes.has(productCode.toLowerCase())) {
+    return undefined
+  }
+
   return fallbackProductCatalogs[productCode.toLowerCase()]
 }
 
@@ -244,4 +228,5 @@ export function getPublicLandingProductCodes() {
     .split(",")
     .map((s) => s.trim())
     .filter(Boolean)
+    .filter((code) => !excludedProductCodes.has(code.toLowerCase()))
 }

@@ -39,6 +39,7 @@ export function Footer() {
                 alt="Ventrion Labs"
                 width={48}
                 height={48}
+                sizes="48px"
                 className="block h-10 w-10 dark:hidden"
               />
               <Image
@@ -46,6 +47,7 @@ export function Footer() {
                 alt="Ventrion Labs"
                 width={48}
                 height={48}
+                sizes="48px"
                 className="hidden h-10 w-10 dark:block"
               />
               <span className="text-lg font-semibold tracking-tight text-foreground">

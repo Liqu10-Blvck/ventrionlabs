@@ -10,27 +10,27 @@ import { Users, Building2, Workflow, Package } from "lucide-react"
 const services = [
   {
     icon: Users,
-    title: "Desarrollo dedicado",
+    title: "Software a medida",
     description:
-      "Construimos software a medida con contratos cerrados y entregables definidos. Priorizamos claridad operativa, mantenibilidad y continuidad.",
+      "Diseñamos y construimos soluciones específicas para operaciones con necesidades propias, reglas complejas y procesos críticos.",
   },
   {
     icon: Building2,
-    title: "Construcción de sistemas internos",
+    title: "Sistemas internos",
     description:
-      "Desarrollamos sistemas empresariales para ordenar la operación: flujos críticos, permisos, trazabilidad y control de datos.",
+      "Creamos plataformas internas para ordenar flujos, permisos, trazabilidad, control y visibilidad operativa.",
   },
   {
     icon: Workflow,
     title: "Automatización de procesos",
     description:
-      "Reducimos trabajo manual con automatizaciones diseñadas para operar en escenarios reales y sostener cambios de negocio.",
+      "Reducimos trabajo manual y errores operativos con automatizaciones diseñadas para funcionar en escenarios reales.",
   },
   {
     icon: Package,
-    title: "Productos propios",
+    title: "Productos verticales",
     description:
-      "Ofrecemos productos listos para usar que resuelven necesidades recurrentes y se adaptan a distintos contextos de operación.",
+      "Ofrecemos productos listos para usar orientados a industrias y necesidades recurrentes, con foco en adopción rápida y orden operativo.",
   },
 ]
 
@@ -43,22 +43,23 @@ export function WhatWeDoSection() {
             Lo que hacemos
           </p>
           <h2 className="text-balance text-2xl font-semibold tracking-tight text-foreground sm:text-3xl md:text-4xl">
-            Qué hacemos
+            Qué hace Ventrion Labs
           </h2>
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-            Construimos sistemas sólidos para operaciones en crecimiento. Trabajo
-            dedicado, alcance claro y una ejecución técnica sobria.
+            Ayudamos a empresas que necesitan ordenar su operación, digitalizar
+            procesos críticos y construir una base tecnológica más clara para crecer.
           </p>
         </div>
 
         <div className="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {services.map((service) => (
+          {services.map((service, index) => (
             <Card
               key={service.title}
-              className="group border-border bg-background transition-all duration-300 hover:border-foreground/20 hover:shadow-lg"
+              className="futuristic-panel motion-safe-lift group border-border bg-background/80 shadow-sm transition-all duration-300 hover:border-foreground/20 hover:shadow-2xl"
+              style={{ animationDelay: `${index * 90}ms` }}
             >
               <CardHeader>
-                <div className="mb-3 flex size-10 items-center justify-center rounded-lg bg-secondary text-foreground transition-colors duration-300 group-hover:bg-foreground group-hover:text-background">
+                <div className="animate-pulse-glow mb-3 flex size-10 items-center justify-center rounded-lg bg-secondary text-foreground transition-colors duration-300 group-hover:bg-foreground group-hover:text-background">
                   <service.icon className="size-5" />
                 </div>
                 <CardTitle className="text-foreground">

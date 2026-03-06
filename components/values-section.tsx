@@ -5,19 +5,19 @@ const values = [
     icon: Target,
     title: "Enfoque en resultados",
     description:
-      "Cada línea de código se mide por el impacto real que genera. No construimos software por construir, sino para resolver problemas concretos con métricas claras.",
+      "Priorizamos soluciones que resuelven problemas concretos y mejoran la operación con criterios claros de implementación.",
   },
   {
     icon: Users,
     title: "Cercanos al operador",
     description:
-      "Pasamos tiempo en campo con nuestros clientes. Entendemos su día a día antes de escribir una sola línea de código. El software debe adaptarse al negocio, no al revés.",
+      "Buscamos entender el día a día de la operación antes de diseñar una solución. El software debe adaptarse al negocio, no al revés.",
   },
   {
     icon: Lightbulb,
     title: "Simplicidad radical",
     description:
-      "Eliminamos capas innecesarias. Nuestras interfaces son intuitivas, nuestros procesos son directos y nuestras arquitecturas son limpias.",
+      "Reducimos complejidad innecesaria para que procesos, interfaces y decisiones técnicas sean más claros de sostener en el tiempo.",
   },
 ]
 
@@ -32,7 +32,7 @@ export function ValuesSection() {
               Sobre nosotros
             </p>
             <h2 className="text-balance text-2xl font-semibold tracking-tight text-foreground sm:text-3xl md:text-4xl">
-              Creemos en el software que se paga solo
+              Creemos en el software útil para operaciones reales
             </h2>
             <p className="mt-4 max-w-lg text-sm leading-relaxed text-muted-foreground sm:text-base">
               Ventrion Labs nació de una convicción: las empresas que

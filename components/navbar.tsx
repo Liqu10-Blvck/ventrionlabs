@@ -28,6 +28,7 @@ export function Navbar() {
             width={250}
             height={80}
             priority
+            sizes="(max-width: 768px) 160px, 250px"
             className="block h-12 w-auto dark:hidden"
           />
           <Image
@@ -35,7 +36,7 @@ export function Navbar() {
             alt="Ventrion Labs"
             width={250}
             height={80}
-            priority
+            sizes="(max-width: 768px) 160px, 250px"
             className="hidden h-14 w-auto dark:block"
           />
         </Link>
