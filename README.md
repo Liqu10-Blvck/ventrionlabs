@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/ventrionlabsblack.png" alt="Ventrion Labs" width="420" />
+  <img src="public/ventrionlabswhite.png" alt="Ventrion Labs" width="420" />
 </p>
 
 # Ventrion Labs
