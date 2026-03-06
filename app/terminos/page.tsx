@@ -2,9 +2,18 @@ import type { Metadata } from "next"
 import { SitePageShell } from "@/components/site-page-shell"
 
 export const metadata: Metadata = {
-  title: "Términos del sitio | Ventrion Labs",
+  title: "Términos del sitio",
   description:
     "Términos generales de uso del sitio web de Ventrion Labs.",
+  alternates: {
+    canonical: "/terminos",
+  },
+  openGraph: {
+    title: "Términos del sitio | Ventrion Labs",
+    description:
+      "Términos generales de uso del sitio web de Ventrion Labs.",
+    url: "/terminos",
+  },
 }
 
 export default function TerminosPage() {

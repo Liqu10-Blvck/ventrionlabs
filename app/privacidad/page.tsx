@@ -2,9 +2,18 @@ import type { Metadata } from "next"
 import { SitePageShell } from "@/components/site-page-shell"
 
 export const metadata: Metadata = {
-  title: "Privacidad | Ventrion Labs",
+  title: "Privacidad",
   description:
     "Política de privacidad del sitio de Ventrion Labs respecto de los datos enviados a través del formulario de contacto.",
+  alternates: {
+    canonical: "/privacidad",
+  },
+  openGraph: {
+    title: "Privacidad | Ventrion Labs",
+    description:
+      "Política de privacidad del sitio de Ventrion Labs respecto de los datos enviados a través del formulario de contacto.",
+    url: "/privacidad",
+  },
 }
 
 export default function PrivacidadPage() {

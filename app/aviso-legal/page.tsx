@@ -2,9 +2,18 @@ import type { Metadata } from "next"
 import { SitePageShell } from "@/components/site-page-shell"
 
 export const metadata: Metadata = {
-  title: "Aviso legal | Ventrion Labs",
+  title: "Aviso legal",
   description:
     "Aviso legal e información general del sitio web de Ventrion Labs.",
+  alternates: {
+    canonical: "/aviso-legal",
+  },
+  openGraph: {
+    title: "Aviso legal | Ventrion Labs",
+    description:
+      "Aviso legal e información general del sitio web de Ventrion Labs.",
+    url: "/aviso-legal",
+  },
 }
 
 export default function AvisoLegalPage() {
