@@ -24,7 +24,7 @@ function humanizeCode(code: string) {
 export function translateModuleLabel(params: {
   code: string
   apiName?: string
-  locale?: "es"
+  locale?: "es" | "en"
 }) {
   const { code, apiName, locale = "es" } = params
 

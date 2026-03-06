@@ -1,33 +1,73 @@
 import Image from "next/image"
 import { Separator } from "@/components/ui/separator"
+import { withLocalePath, type Locale } from "@/lib/i18n"
 
-const footerSections = [
-  {
-    title: "Empresa",
-    links: [
-      { label: "Nosotros", href: "/nosotros" },
-      { label: "Filosofía", href: "/filosofia" },
-    ],
-  },
-  {
-    title: "Recursos",
-    links: [
-      { label: "Productos", href: "/#productos" },
-      { label: "Casos de uso", href: "/casos-de-uso" },
-      { label: "Contacto", href: "/#contacto" },
-    ],
-  },
-  {
-    title: "Legal",
-    links: [
-      { label: "Privacidad", href: "/privacidad" },
-      { label: "Términos del sitio", href: "/terminos" },
-      { label: "Aviso legal", href: "/aviso-legal" },
-    ],
-  },
-]
+type FooterCopy = {
+  company: string
+  sections: string
+  legal: string
+  about: string
+  philosophy: string
+  build: string
+  problem: string
+  products: string
+  technology: string
+  privacy: string
+  terms: string
+  legalNotice: string
+  description: string
+  rights: string
+}
 
-export function Footer() {
+const defaultFooterCopy: FooterCopy = {
+  company: "Empresa",
+  sections: "Secciones",
+  legal: "Legal",
+  about: "Nosotros",
+  philosophy: "Filosofía",
+  build: "Qué construimos",
+  problem: "Problema",
+  products: "Productos",
+  technology: "Tecnología",
+  privacy: "Privacidad",
+  terms: "Términos",
+  legalNotice: "Aviso legal",
+  description:
+    "Sistemas de software modernos para empresas que necesitan flujos más claros, mejor ejecución y control operacional real.",
+  rights: "© 2026 Ventrion Labs. Todos los derechos reservados.",
+}
+
+export function Footer({
+  locale = "es-cl",
+  copy = defaultFooterCopy,
+}: Partial<{ locale: Locale; copy: FooterCopy }>) {
+  const footerSections = [
+    {
+      title: copy.company,
+      links: [
+        { label: copy.about, href: withLocalePath(locale, "/nosotros") },
+        { label: copy.philosophy, href: withLocalePath(locale, "/filosofia") },
+      ],
+    },
+    {
+      title: copy.sections,
+      links: [
+        { label: copy.build, href: "#soluciones" },
+        { label: copy.problem, href: "#problema" },
+        { label: copy.products, href: "#productos" },
+        { label: copy.technology, href: "#tecnologia" },
+      ],
+    },
+    {
+      title: copy.legal,
+      links: [
+        { label: copy.privacy, href: withLocalePath(locale, "/privacidad") },
+        { label: copy.terms, href: withLocalePath(locale, "/terminos") },
+        { label: copy.legalNotice, href: withLocalePath(locale, "/aviso-legal") },
+      ],
+    },
+  ]
+
   return (
     <footer className="border-t border-border bg-background px-6 py-12 sm:py-16">
       <div className="mx-auto max-w-6xl">
@@ -55,7 +95,7 @@ export function Footer() {
               </span>
             </div>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
-              Software que impulsa la excelencia operativa de negocios reales.
+              {copy.description}
             </p>
           </div>
 
@@ -80,11 +120,11 @@ export function Footer() {
           ))}
         </div>
 
-        <Separator className="my-8 sm:my-10" />
+        <Separator className="my-8 bg-border sm:my-10" />
 
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <p className="text-xs text-muted-foreground">
-            {"© 2026 Ventrion Labs. Todos los derechos reservados."}
+            {copy.rights}
           </p>
           <div className="flex items-center gap-6">
             <a

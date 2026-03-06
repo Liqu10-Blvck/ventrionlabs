@@ -7,15 +7,24 @@ import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Menu, X } from "lucide-react"
 
-const navLinks = [
-  { label: "Soluciones", href: "#soluciones" },
-  { label: "Productos", href: "#productos" },
-  { label: "Nosotros", href: "#nosotros" },
-  { label: "Proceso", href: "#proceso" },
-  { label: "Contacto", href: "#contacto" },
+type NavbarProps = {
+  ctaLabel: string
+  navLinks: Array<{ label: string; href: string }>
+  themeLabel: string
+}
+
+const defaultNavLinks = [
+  { label: "Nosotros", href: "/nosotros" },
+  { label: "Filosofía", href: "/filosofia" },
+  { label: "Casos de uso", href: "/casos-de-uso" },
+  { label: "Contacto", href: "/#contacto" },
 ]
 
-export function Navbar() {
+export function Navbar({
+  ctaLabel = "Contactar",
+  navLinks = defaultNavLinks,
+  themeLabel = "Tema",
+}: Partial<NavbarProps>) {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
@@ -37,7 +46,8 @@ export function Navbar() {
             width={250}
             height={80}
             sizes="(max-width: 768px) 160px, 250px"
-            className="hidden h-14 w-auto dark:block"
+            priority
+            className="hidden h-12 w-auto dark:block"
           />
         </Link>
 
@@ -56,7 +66,7 @@ export function Navbar() {
         <div className="hidden items-center gap-3 md:flex">
           <ThemeToggle />
           <Button size="sm" asChild>
-            <a href="#contacto">Contactar</a>
+            <a href="#contacto">{ctaLabel}</a>
           </Button>
         </div>
 
@@ -87,12 +97,12 @@ export function Navbar() {
               </a>
             ))}
             <div className="flex items-center justify-between pt-2">
-              <span className="text-sm text-muted-foreground">Tema</span>
+              <span className="text-sm text-muted-foreground">{themeLabel}</span>
               <ThemeToggle />
             </div>
             <div className="flex flex-col gap-2 pt-2">
               <Button size="sm" className="w-full" asChild>
-                <a href="#contacto">Contactar</a>
+                <a href="#contacto">{ctaLabel}</a>
               </Button>
             </div>
           </div>

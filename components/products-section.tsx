@@ -19,29 +19,30 @@ import {
   getPublicLandingProductCodes,
 } from "@/lib/public-landing-api"
 import { translateModuleLabel } from "@/lib/module-i18n"
+import type { Locale } from "@/lib/i18n"
+
+type ProductsCopy = {
+  eyebrow: string
+  title: string
+  description: string
+  audiences: Record<string, string>
+  summaries: Record<string, string>
+  useCases: Record<string, string>
+  verticalSolution: string
+  fallbackSummary: string
+  fallbackDescription: string
+  fallbackUseCase: string
+  startingAt: string
+  configuration: string
+  optionsLabel: (count: number) => string
+  capabilitiesLabel: string
+  requestDemo: string
+}
 
 const iconByProductCode: Record<string, typeof ShoppingCart> = {
   fruitpos: ShoppingCart,
   barberos: Scissors,
   educontrol: GraduationCap,
-}
-
-const productAudienceByCode: Record<string, string> = {
-  fruitpos: "Retail y comercio",
-  barberos: "Servicios y agenda",
-  educontrol: "Educación y control interno",
-}
-
-const productSummaryByCode: Record<string, string> = {
-  fruitpos: "Ordena ventas, catálogo, inventario y operación diaria desde un solo sistema.",
-  barberos: "Centraliza reservas, atención, clientes y seguimiento operativo del negocio.",
-  educontrol: "Mejora control administrativo, procesos internos y visibilidad de información crítica.",
-}
-
-const productUseCaseByCode: Record<string, string> = {
-  fruitpos: "Ideal para puntos de venta que necesitan ordenar caja, inventario y operación diaria.",
-  barberos: "Ideal para negocios con reservas, atención recurrente y gestión de clientes.",
-  educontrol: "Ideal para instituciones que requieren control administrativo y trazabilidad interna.",
 }
 
 function formatPrice(amount: string, currency: string) {
@@ -73,19 +74,19 @@ function getStartingPrice(plans: Array<{ prices?: Array<{ amount: string; curren
   return `${formatPrice(min.amount, min.currency)}/${min.interval}`
 }
 
-function getTopModules(plans: Array<{ modules?: Array<{ code: string; name?: string }> }>) {
+function getTopModules(plans: Array<{ modules?: Array<{ code: string; name?: string }> }>, locale: Locale) {
   const modules = plans
     .flatMap((p) => p.modules ?? [])
     .map((m) => ({
       code: m.code,
-      label: translateModuleLabel({ code: m.code, apiName: m.name, locale: "es" }),
+      label: translateModuleLabel({ code: m.code, apiName: m.name, locale: locale === "es-cl" ? "es" : "en" }),
     }))
 
   const unique = Array.from(new Map(modules.map((m) => [m.code, m])).values())
   return unique.slice(0, 6)
 }
 
-export async function ProductsSection() {
+export async function ProductsSection({ locale, copy }: { locale: Locale; copy: ProductsCopy }) {
   let productCodes: string[] = []
 
   try {
@@ -119,18 +120,17 @@ export async function ProductsSection() {
   const visibleCatalogs = catalogs.filter((catalog) => catalog.code.toLowerCase() !== "demo")
 
   return (
-    <section id="productos" className="bg-secondary/50 px-6 py-20 sm:py-24 md:py-32">
+    <section id="productos" className="bg-secondary/30 px-6 py-20 dark:bg-[#070b17] sm:py-24 md:py-32">
       <div className="mx-auto max-w-6xl">
         <div className="mb-10 flex flex-col items-center text-center sm:mb-16">
-          <p className="mb-3 text-sm font-medium uppercase tracking-widest text-muted-foreground">
-            Productos
+          <p className="mb-3 text-sm font-medium uppercase tracking-[0.24em] text-muted-foreground dark:text-white/45">
+            {copy.eyebrow}
           </p>
-          <h2 className="text-balance text-2xl font-semibold tracking-tight text-foreground sm:text-3xl md:text-4xl">
-            Productos presentados como soluciones, no como fichas técnicas
+          <h2 className="max-w-4xl text-balance text-3xl font-semibold tracking-tight text-foreground dark:text-white sm:text-4xl md:text-5xl">
+            {copy.title}
           </h2>
-          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-            Cada producto está orientado a un tipo de operación concreto y busca
-            resolver un problema real con más orden, visibilidad y continuidad.
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground dark:text-white/60 sm:text-base">
+            {copy.description}
           </p>
         </div>
 
@@ -138,12 +138,12 @@ export async function ProductsSection() {
           {visibleCatalogs.map((catalog, index) => (
             <Card
               key={catalog.code}
-              className="futuristic-panel motion-safe-lift group flex flex-col border-border bg-background/85 shadow-sm transition-all duration-300 hover:border-foreground/20 hover:shadow-2xl"
+              className="futuristic-panel motion-safe-lift group flex flex-col border-border bg-card/80 shadow-sm transition-all duration-300 hover:border-foreground/15 hover:bg-card hover:shadow-2xl hover:shadow-black/8 dark:border-white/10 dark:bg-white/3 dark:hover:border-white/20 dark:hover:bg-white/5 dark:hover:shadow-black/20"
               style={{ animationDelay: `${index * 120}ms` }}
             >
               <CardHeader className="flex-1">
                 <div className="mb-4 flex items-center justify-between">
-                  <div className="animate-pulse-glow flex size-11 items-center justify-center rounded-xl bg-secondary text-foreground transition-colors duration-300 group-hover:bg-foreground group-hover:text-background">
+                  <div className="flex size-11 items-center justify-center rounded-xl border border-border bg-secondary text-foreground transition-colors duration-300 group-hover:bg-foreground group-hover:text-background dark:border-white/10 dark:bg-white/4 dark:text-white dark:group-hover:bg-white dark:group-hover:text-black">
                     {(() => {
                       const Icon =
                         iconByProductCode[catalog.code.toLowerCase()] ??
@@ -153,64 +153,62 @@ export async function ProductsSection() {
                   </div>
                   <Badge
                     variant="secondary"
-                    className="animate-border-beam text-xs"
+                    className="border border-border bg-secondary text-xs text-muted-foreground dark:border-white/10 dark:bg-white/4 dark:text-white/70"
                   >
-                    {productAudienceByCode[catalog.code.toLowerCase()] ?? "Solución vertical"}
+                    {copy.audiences[catalog.code.toLowerCase()] ?? copy.verticalSolution}
                   </Badge>
                 </div>
-                <CardTitle className="flex items-center gap-2 text-xl text-foreground">
+                <CardTitle className="flex items-center gap-2 text-xl text-foreground dark:text-white">
                   {catalog.ok
                     ? catalog.data.product.name ?? catalog.data.product.code
                     : catalog.code}
-                  <ArrowUpRight className="size-4 text-muted-foreground opacity-0 transition-all duration-200 group-hover:opacity-100" />
+                  <ArrowUpRight className="size-4 text-muted-foreground opacity-0 transition-all duration-200 group-hover:opacity-100 dark:text-white/40" />
                 </CardTitle>
-                <CardDescription className="text-sm leading-relaxed text-muted-foreground">
+                <CardDescription className="text-sm leading-relaxed text-muted-foreground dark:text-white/60">
                   {catalog.ok
-                    ? productSummaryByCode[catalog.code.toLowerCase()] ??
-                      "Producto diseñado para resolver procesos críticos con más orden y trazabilidad."
-                    : "Esta solución puede configurarse según la necesidad operativa del negocio."}
+                    ? copy.summaries[catalog.code.toLowerCase()] ?? copy.fallbackSummary
+                    : copy.fallbackDescription}
                 </CardDescription>
                 {catalog.ok ? (
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                    {productUseCaseByCode[catalog.code.toLowerCase()] ??
-                      "Ideal para operaciones que requieren más control, trazabilidad y estandarización."}
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground dark:text-white/60">
+                    {copy.useCases[catalog.code.toLowerCase()] ?? copy.fallbackUseCase}
                   </p>
                 ) : null}
                 {!catalog.ok ? (
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                    No pudimos cargar el detalle completo en este momento, pero la solución sigue disponible para evaluación comercial.
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground dark:text-white/60">
+                    We could not load the full detail right now, but the solution is still available for commercial evaluation.
                   </p>
                 ) : null}
               </CardHeader>
               <CardContent>
-                <div className="border-t border-border pt-4">
+                <div className="border-t border-border pt-4 dark:border-white/10">
                   {catalog.ok ? (
                     <div className="grid gap-4">
                       {(() => {
                         const startingPrice = getStartingPrice(catalog.data.plans)
-                        const modules = getTopModules(catalog.data.plans)
+                        const modules = getTopModules(catalog.data.plans, locale)
                         return (
                           <>
                             <div className="flex items-center justify-between gap-3">
-                              <p className="text-sm font-medium text-muted-foreground">
-                                {startingPrice ? "Desde" : "Configuración"}
+                              <p className="text-sm font-medium text-muted-foreground dark:text-white/50">
+                                {startingPrice ? copy.startingAt : copy.configuration}
                               </p>
-                              <p className="text-sm font-semibold text-foreground">
-                                {startingPrice ?? `${catalog.data.plans.length} alternativas`}
+                              <p className="text-sm font-semibold text-foreground dark:text-white">
+                                {startingPrice ?? copy.optionsLabel(catalog.data.plans.length)}
                               </p>
                             </div>
 
                             {modules.length > 0 ? (
                               <div className="grid gap-2">
-                                <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                                  Capacidades clave
+                                <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground dark:text-white/45">
+                                  {copy.capabilitiesLabel}
                                 </p>
                                 <div className="flex flex-wrap gap-2">
                                   {modules.map((m) => (
                                     <Badge
                                       key={`module-${catalog.code}-${m.code}`}
                                       variant="secondary"
-                                      className="px-2 py-1 text-[11px] font-medium"
+                                      className="border border-border bg-secondary px-2 py-1 text-[11px] font-medium text-muted-foreground dark:border-white/10 dark:bg-white/4 dark:text-white/70"
                                     >
                                       {m.label}
                                     </Badge>
@@ -220,7 +218,7 @@ export async function ProductsSection() {
                             ) : null}
 
                             <Button size="sm" className="motion-safe-lift w-full" asChild>
-                              <a href="#contacto">Solicitar demo</a>
+                              <a href="#contacto">{copy.requestDemo}</a>
                             </Button>
                           </>
                         )

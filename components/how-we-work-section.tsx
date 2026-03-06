@@ -1,44 +1,24 @@
-export function HowWeWorkSection() {
-  const steps = [
-    {
-      number: "01",
-      title: "Diagnóstico",
-      description:
-        "Levantamos contexto operativo y definimos alcance verificable. Identificamos riesgos, dependencias y prioridades.",
-    },
-    {
-      number: "02",
-      title: "Diseño de solución",
-      description:
-        "Traducimos objetivos en un diseño claro: flujos, reglas, responsabilidades y criterios de éxito.",
-    },
-    {
-      number: "03",
-      title: "Construcción",
-      description:
-        "Implementamos con entregas iterativas y controladas. Priorizamos continuidad operativa y cambios trazables.",
-    },
-    {
-      number: "04",
-      title: "Evolución continua",
-      description:
-        "Iteramos con orden: mantenimiento, mejoras y ajuste de procesos sin degradación progresiva del sistema.",
-    },
-  ]
+type HowWeWorkSectionProps = {
+  eyebrow: string
+  title: string
+  description: string
+  steps: Array<{ number: string; title: string; description: string }>
+}
+
+export function HowWeWorkSection({ eyebrow, title, description, steps }: HowWeWorkSectionProps) {
 
   return (
     <section id="proceso" className="px-6 py-20 sm:py-24 md:py-32">
       <div className="mx-auto max-w-6xl">
         <div className="mb-10 flex flex-col items-center text-center sm:mb-16">
-          <p className="mb-3 text-sm font-medium uppercase tracking-widest text-muted-foreground">
-            Cómo trabajamos
+          <p className="mb-3 text-sm font-medium uppercase tracking-[0.24em] text-muted-foreground dark:text-white/45">
+            {eyebrow}
           </p>
-          <h2 className="text-balance text-2xl font-semibold tracking-tight text-foreground sm:text-3xl md:text-4xl">
-            Método claro, entregables definidos
+          <h2 className="text-balance text-3xl font-semibold tracking-tight text-foreground dark:text-white sm:text-4xl md:text-5xl">
+            {title}
           </h2>
-          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-            Un proceso estructurado para construir y evolucionar sistemas sin
-            improvisación.
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground dark:text-white/60 sm:text-base">
+            {description}
           </p>
         </div>
 
@@ -47,17 +27,17 @@ export function HowWeWorkSection() {
             <div key={step.number} className="relative">
               {i < steps.length - 1 && (
                 <div
-                  className="absolute right-0 top-6 hidden h-px w-8 translate-x-full bg-border lg:block"
+                  className="absolute right-0 top-6 hidden h-px w-8 translate-x-full bg-border dark:bg-white/10 lg:block"
                   aria-hidden="true"
                 />
               )}
-              <span className="text-3xl font-semibold text-border">
+              <span className="text-3xl font-semibold text-foreground/20 dark:text-white/20">
                 {step.number}
               </span>
-              <h3 className="mt-4 text-base font-semibold text-foreground">
+              <h3 className="mt-4 text-base font-semibold text-foreground dark:text-white">
                 {step.title}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground dark:text-white/60">
                 {step.description}
               </p>
             </div>
