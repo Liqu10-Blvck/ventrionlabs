@@ -1,109 +1,103 @@
+<p align="center">
+  <img src="public/ventrionlabsblack.png" alt="Ventrion Labs" width="420" />
+</p>
+
 # Ventrion Labs
 
-Software para la Excelencia Operativa - Landing Page
+Ventrion Labs construye infraestructura digital para empresas que necesitan operar con más claridad, más control y menos fricción.
 
-## Descripción
+Este repositorio contiene la landing institucional de la marca, diseñada para presentar su propuesta, comunicar su enfoque y convertir visitas en conversaciones comerciales.
 
-Landing page corporativa de Ventrion Labs, empresa especializada en construcción de infraestructura digital para empresas en crecimiento.
+## La marca
 
-## Stack Tecnológico
+Ventrion Labs se posiciona como un partner técnico para negocios reales: empresas donde la operación diaria importa, donde los procesos deben sostenerse y donde el software tiene que resolver problemas concretos, no solo verse bien.
 
-- **Framework**: Next.js 16 (App Router)
-- **Lenguaje**: TypeScript
-- **Estilos**: TailwindCSS v4
-- **UI Components**: shadcn/ui + Radix UI
-- **Iconos**: Lucide React
-- **Validación**: Zod
-- **Formularios**: React Hook Form
-- **Analytics**: Vercel Analytics
+La narrativa del sitio está construida sobre tres ideas centrales:
 
-## Desarrollo
+- excelencia operativa
+- software sobrio y útil
+- crecimiento con base técnica sólida
 
-```bash
-# Instalar dependencias
-pnpm install
+## Qué presenta esta página
 
-# Ejecutar en desarrollo
-pnpm dev
+La landing fue estructurada para explicar con claridad:
 
-# Build para producción
-pnpm build
+- qué problemas resuelve Ventrion Labs
+- cómo piensa y cómo trabaja
+- qué tipo de soluciones y productos puede desarrollar
+- cómo iniciar una conversación comercial con la marca
 
-# Iniciar servidor de producción
-pnpm start
+## Estructura del sitio
 
-# Linting
-pnpm lint
-```
+### Home
 
-## Variables de Entorno
+La página principal reúne las secciones clave de la propuesta:
 
-Copia `.env.example` a `.env` y configura:
+- hero de marca
+- problemas que resolvemos
+- enfoque y soluciones
+- visión y valores
+- proceso de trabajo
+- productos
+- llamado a la acción
+- formulario de contacto
 
-- `PUBLIC_LANDING_API_BASE_URL`: URL del API backend (opcional)
-- `SITE_URL`: URL pública del sitio (para SEO)
-- `GOOGLE_SITE_VERIFICATION`: Token de Google Search Console
-- `RESEND_API_KEY`: API key de Resend para enviar emails del formulario
-- `CONTACT_TO_EMAIL`: email donde recibirás los contactos (puede ser tu correo personal al inicio)
-- `CONTACT_FROM_EMAIL`: remitente del formulario; mientras no tengas dominio, usa `Ventrion Labs <onboarding@resend.dev>`
+### Páginas institucionales
 
-## Formulario de Contacto
+Desde el footer se enlazan páginas editoriales pensadas para dar más profundidad a la marca:
 
-El endpoint `app/api/contact/route.ts` está preparado para enviar los mensajes del formulario usando la API HTTP de Resend.
+- `Nosotros`
+- `Filosofía`
+- `Casos de uso`
+- `Privacidad`
+- `Términos del sitio`
+- `Aviso legal`
 
-Flujo recomendado para comenzar a probar:
+## Dirección visual
 
-- configura `CONTACT_TO_EMAIL` con tu correo personal
-- configura `CONTACT_FROM_EMAIL` con `Ventrion Labs <onboarding@resend.dev>`
-- agrega tu `RESEND_API_KEY`
+El sitio utiliza los assets oficiales de Ventrion Labs integrados desde `public/`, incluyendo isotipo y logotipo en variantes para fondos claros y oscuros.
 
-Cuando compres tu dominio, podrás cambiar `CONTACT_FROM_EMAIL` a una dirección corporativa como `contacto@ventrionlabs.cl` una vez que el dominio esté verificado en tu proveedor de email.
+La experiencia visual busca transmitir:
 
-## Estructura del Proyecto
+- sobriedad
+- criterio técnico
+- claridad
+- una estética corporativa moderna sin exceso decorativo
 
-```
-ventrionlabs/
-├── app/                    # Next.js App Router
-│   ├── api/               # API Routes
-│   ├── layout.tsx         # Layout principal
-│   ├── page.tsx           # Página principal
-│   ├── globals.css        # Estilos globales
-│   └── sitemap.ts         # Generación de sitemap
-├── components/            # Componentes React
-│   ├── ui/               # Componentes base (shadcn/ui)
-│   └── *-section.tsx     # Secciones de la landing
-├── public/               # Assets estáticos
-│   └── ventrion*.png     # Logos e imágenes
-├── lib/                  # Utilidades
-└── styles/              # Estilos adicionales
-```
+## Producción y presencia pública
 
-## Secciones de la Landing
+La página quedó preparada para salir a producción con una base sólida de presencia digital:
 
-1. **Hero**: Presentación principal con estadísticas
-2. **Problemas**: Desafíos que resolvemos
-3. **Soluciones**: Qué hacemos
-4. **Valores**: Sobre nosotros
-5. **Proceso**: Cómo trabajamos
-6. **Productos**: Plataformas disponibles
-7. **CTA Final**: Llamado a la acción
-8. **Contacto**: Formulario de contacto
-
-## Producción
-
-El sitio está optimizado para:
-
-- ✅ SEO (metadata, sitemap, robots.txt)
-- ✅ Performance (imágenes optimizadas, lazy loading)
-- ✅ Accesibilidad (ARIA labels, navegación por teclado)
-- ✅ Responsive design (mobile-first)
-- ✅ Dark/Light mode
-- ✅ Analytics integrado
+- identidad visual consistente
+- metadata de marca
+- sitemap y robots
+- structured data para buscadores
+- favicon y manifest
+- páginas institucionales enlazadas correctamente
 
 ## Contacto
 
-Email: contacto@ventrionlabs.cl
+El sitio incorpora un formulario de contacto orientado a generar oportunidades comerciales.
+
+En la etapa actual, la infraestructura quedó preparada para que los mensajes puedan ser enviados por correo usando un proveedor transaccional y un destino temporal, mientras la marca termina de consolidar su dominio y correo corporativo.
+
+## Objetivo del proyecto
+
+Más que una landing genérica, este sitio busca dejar una primera impresión clara sobre cómo opera Ventrion Labs:
+
+- con foco en negocio real
+- con criterio técnico
+- con una propuesta seria y contemporánea
+
+## Referencia operativa mínima
+
+Si necesitas preparar el proyecto localmente o desplegarlo, puedes revisar:
+
+- `.env.example`
+- `.env.production.example`
+- `DEPLOYMENT.md`
 
 ---
 
-© 2026 Ventrion Labs. Todos los derechos reservados.
+**Ventrion Labs**  
+Software para la Excelencia Operativa
