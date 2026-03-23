@@ -1,24 +1,32 @@
 import type { Metadata } from "next"
 import { SitePageShell } from "@/components/site-page-shell"
+import { type Locale } from "@/lib/i18n"
 
-export const metadata: Metadata = {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  return {
   title: "Términos del sitio",
   description:
     "Términos generales de uso del sitio web de Ventrion Labs.",
   alternates: {
-    canonical: "/terminos",
+    canonical: `/${locale}/terminos`,
   },
   openGraph: {
     title: "Términos del sitio | Ventrion Labs",
     description:
       "Términos generales de uso del sitio web de Ventrion Labs.",
-    url: "/terminos",
+    url: `/${locale}/terminos`,
   },
 }
 
-export default function TerminosPage() {
+}
+
+export default async function TerminosPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+
   return (
     <SitePageShell
+      locale={locale as Locale}
       eyebrow="Legal"
       title="Términos generales del sitio"
       description="Estos términos regulan el uso informativo del sitio web de Ventrion Labs. No constituyen, por sí solos, una oferta contractual de servicios ni reemplazan propuestas o acuerdos específicos."

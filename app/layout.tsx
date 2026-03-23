@@ -9,8 +9,12 @@ import "./globals.css"
 
 function getSiteUrl() {
   const raw = process.env.SITE_URL?.trim()
-  if (!raw) return "http://localhost:3000"
-  return raw.replace(/\/$/, "")
+  if (raw) return raw.replace(/\/$/, "")
+  
+  const vercel = process.env.VERCEL_URL?.trim()
+  if (vercel) return `https://${vercel}`
+  
+  return "http://localhost:3000"
 }
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })

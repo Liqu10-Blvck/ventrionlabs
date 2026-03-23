@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return {}
   }
 
-  const dict = getLandingDictionary(locale)
+  const dict = await getLandingDictionary(locale)
   const canonicalPath = `/${locale}`
 
   return {
@@ -58,8 +58,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 }
 
-function buildStructuredData(locale: Locale) {
-  const dict = getLandingDictionary(locale)
+async function buildStructuredData(locale: Locale) {
+  const dict = await getLandingDictionary(locale)
   const pageUrl = `${siteUrl}/${locale}`
 
   return {
@@ -107,8 +107,8 @@ export default async function LocalizedHome({ params }: PageProps) {
     notFound()
   }
 
-  const dict = getLandingDictionary(locale)
-  const structuredData = buildStructuredData(locale)
+  const dict = await getLandingDictionary(locale)
+  const structuredData = await buildStructuredData(locale)
 
   return (
     <div className="min-h-screen bg-background text-foreground">

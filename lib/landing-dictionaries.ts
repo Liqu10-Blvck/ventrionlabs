@@ -633,6 +633,31 @@ export const landingDictionaries: Record<Locale, Dictionary> = {
   },
 }
 
-export function getLandingDictionary(locale: Locale) {
+export async function getLandingDictionary(locale: Locale): Promise<Dictionary> {
+  // Configured to be able to fetch dictionary content from an external source (e.g. Headless CMS)
+  const cmsBase = process.env.CMS_CONTENT_URL
+  
+  if (cmsBase) {
+    try {
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 3000)
+      
+      const res = await fetch(`${cmsBase}/api/dictionaries/${locale}`, {
+        next: { revalidate: 3600 },
+        signal: controller.signal
+      })
+      
+      clearTimeout(timeoutId)
+      
+      if (res.ok) {
+        const data = await res.json()
+        return data as Dictionary
+      }
+    } catch (e) {
+      console.warn(`[Content Fetch] Failed to load from CMS, falling back to local dictionaries for ${locale}`, e)
+    }
+  }
+
+  // Fallback to local embedded dictionary
   return landingDictionaries[locale]
 }

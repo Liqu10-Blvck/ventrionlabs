@@ -1,24 +1,32 @@
 import type { Metadata } from "next"
 import { SitePageShell } from "@/components/site-page-shell"
+import { type Locale } from "@/lib/i18n"
 
-export const metadata: Metadata = {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  return {
   title: "Casos de uso",
   description:
     "Escenarios típicos donde Ventrion Labs aporta valor: sistemas internos, automatización y productos para operaciones reales.",
   alternates: {
-    canonical: "/casos-de-uso",
+    canonical: `/${locale}/casos-de-uso`,
   },
   openGraph: {
     title: "Casos de uso | Ventrion Labs",
     description:
       "Escenarios típicos donde Ventrion Labs aporta valor: sistemas internos, automatización y productos para operaciones reales.",
-    url: "/casos-de-uso",
+    url: `/${locale}/casos-de-uso`,
   },
 }
 
-export default function CasosDeUsoPage() {
+}
+
+export default async function CasosDeUsoPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+
   return (
     <SitePageShell
+      locale={locale as Locale}
       eyebrow="Recursos"
       title="Casos de uso donde una base digital bien hecha cambia la operación"
       description="Estas son algunas situaciones típicas donde intervenimos para convertir procesos dispersos en sistemas más claros, controlables y escalables."

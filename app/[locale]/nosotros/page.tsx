@@ -1,24 +1,32 @@
 import type { Metadata } from "next"
 import { SitePageShell } from "@/components/site-page-shell"
+import { type Locale } from "@/lib/i18n"
 
-export const metadata: Metadata = {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  return {
   title: "Nosotros",
   description:
     "Conoce a Ventrion Labs, nuestro enfoque de trabajo y cómo construimos infraestructura digital para empresas en crecimiento.",
   alternates: {
-    canonical: "/nosotros",
+    canonical: `/${locale}/nosotros`,
   },
   openGraph: {
     title: "Nosotros | Ventrion Labs",
     description:
       "Conoce a Ventrion Labs, nuestro enfoque de trabajo y cómo construimos infraestructura digital para empresas en crecimiento.",
-    url: "/nosotros",
+    url: `/${locale}/nosotros`,
   },
 }
 
-export default function NosotrosPage() {
+}
+
+export default async function NosotrosPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+
   return (
     <SitePageShell
+      locale={locale as Locale}
       eyebrow="Empresa"
       title="Construimos sistemas claros para operaciones que no pueden detenerse"
       description="Ventrion Labs desarrolla software e infraestructura digital para empresas que necesitan ordenar procesos, ganar visibilidad y sostener crecimiento sin improvisación técnica."

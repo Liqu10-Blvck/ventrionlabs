@@ -1,8 +1,11 @@
 import Link from "next/link"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
+import { getLandingDictionary } from "@/lib/landing-dictionaries"
+import { withLocalePath, type Locale } from "@/lib/i18n"
 
 type SitePageShellProps = {
+  locale: Locale
   eyebrow: string
   title: string
   description: string
@@ -12,15 +15,22 @@ type SitePageShellProps = {
   }>
 }
 
-export function SitePageShell({
+export async function SitePageShell({
+  locale,
   eyebrow,
   title,
   description,
   sections,
 }: SitePageShellProps) {
+  const dict = await getLandingDictionary(locale)
+
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Navbar />
+      <Navbar
+        ctaLabel={dict.navbar.cta}
+        navLinks={dict.navbar.links}
+        themeLabel={dict.navbar.theme}
+      />
       <main className="px-6 pb-24 pt-28 sm:pt-32 md:pt-40">
         <div className="mx-auto max-w-4xl">
           <div className="max-w-3xl">
@@ -70,13 +80,13 @@ export function SitePageShell({
               </p>
               <div className="mt-5 flex flex-wrap items-center gap-3">
                 <Link
-                  href="/#contacto"
+                  href={withLocalePath(locale, "/#contacto")}
                   className="inline-flex items-center justify-center rounded-md bg-foreground px-4 py-2 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
                 >
                   Hablar con Ventrion Labs
                 </Link>
                 <Link
-                  href="/"
+                  href={withLocalePath(locale, "/")}
                   className="inline-flex items-center justify-center rounded-md border border-border px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-secondary"
                 >
                   Volver al inicio
@@ -86,7 +96,7 @@ export function SitePageShell({
           </div>
         </div>
       </main>
-      <Footer />
+      <Footer locale={locale} copy={dict.footer} />
     </div>
   )
 }

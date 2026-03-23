@@ -1,24 +1,32 @@
 import type { Metadata } from "next"
 import { SitePageShell } from "@/components/site-page-shell"
+import { type Locale } from "@/lib/i18n"
 
-export const metadata: Metadata = {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  return {
   title: "Aviso legal",
   description:
     "Aviso legal e información general del sitio web de Ventrion Labs.",
   alternates: {
-    canonical: "/aviso-legal",
+    canonical: `/${locale}/aviso-legal`,
   },
   openGraph: {
     title: "Aviso legal | Ventrion Labs",
     description:
       "Aviso legal e información general del sitio web de Ventrion Labs.",
-    url: "/aviso-legal",
+    url: `/${locale}/aviso-legal`,
   },
 }
 
-export default function AvisoLegalPage() {
+}
+
+export default async function AvisoLegalPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+
   return (
     <SitePageShell
+      locale={locale as Locale}
       eyebrow="Legal"
       title="Información general del sitio"
       description="Este sitio presenta información institucional y comercial de Ventrion Labs sobre su enfoque, servicios y soluciones digitales para empresas en crecimiento."

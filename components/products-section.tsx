@@ -117,7 +117,7 @@ export async function ProductsSection({ locale, copy }: { locale: Locale; copy: 
     }),
   )
 
-  const visibleCatalogs = catalogs.filter((catalog) => catalog.code.toLowerCase() !== "demo")
+  const visibleCatalogs = catalogs.filter((catalog) => catalog.ok)
 
   return (
     <section id="productos" className="bg-secondary/30 px-6 py-20 dark:bg-[#070b17] sm:py-24 md:py-32">

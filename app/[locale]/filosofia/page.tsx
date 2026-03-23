@@ -1,24 +1,32 @@
 import type { Metadata } from "next"
 import { SitePageShell } from "@/components/site-page-shell"
+import { type Locale } from "@/lib/i18n"
 
-export const metadata: Metadata = {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  return {
   title: "Filosofía",
   description:
     "La filosofía de trabajo de Ventrion Labs: software sobrio, decisiones claras y foco en impacto operacional.",
   alternates: {
-    canonical: "/filosofia",
+    canonical: `/${locale}/filosofia`,
   },
   openGraph: {
     title: "Filosofía | Ventrion Labs",
     description:
       "La filosofía de trabajo de Ventrion Labs: software sobrio, decisiones claras y foco en impacto operacional.",
-    url: "/filosofia",
+    url: `/${locale}/filosofia`,
   },
 }
 
-export default function FilosofiaPage() {
+}
+
+export default async function FilosofiaPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+
   return (
     <SitePageShell
+      locale={locale as Locale}
       eyebrow="Empresa"
       title="Creemos en el software que reduce complejidad, no en el que la disfraza"
       description="Nuestra filosofía combina rigor técnico con una visión pragmática del negocio. Preferimos sistemas claros, mantenibles y útiles antes que soluciones espectaculares pero frágiles."

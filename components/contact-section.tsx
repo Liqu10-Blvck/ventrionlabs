@@ -1,9 +1,11 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useTransition } from "react"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
+
+import { submitContact } from "@/app/actions/contact"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -28,7 +30,7 @@ const contactSchema = z.object({
 type ContactFormValues = z.infer<typeof contactSchema>
 
 export function ContactSection() {
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isPending, startTransition] = useTransition()
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
@@ -40,38 +42,28 @@ export function ContactSection() {
     },
   })
 
-  async function onSubmit(values: ContactFormValues) {
-    setIsSubmitting(true)
+  function onSubmit(values: ContactFormValues) {
+    startTransition(async () => {
+      try {
+        const response = await submitContact(values)
 
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(values),
-      })
+        if (!response.ok) {
+          throw new Error(response.message || "Error al enviar mensaje")
+        }
 
-      if (!res.ok) {
-        const text = await res.text().catch(() => "")
-        throw new Error(text || `Error ${res.status}`)
+        toast({
+          title: "Mensaje enviado",
+          description: "Te contactaremos pronto.",
+        })
+        form.reset()
+      } catch (error) {
+        toast({
+          title: "No se pudo enviar",
+          description: error instanceof Error ? error.message : "Intenta nuevamente.",
+          variant: "destructive",
+        })
       }
-
-      toast({
-        title: "Mensaje enviado",
-        description: "Te contactaremos pronto.",
-      })
-      form.reset()
-    } catch (error) {
-      toast({
-        title: "No se pudo enviar",
-        description: error instanceof Error ? error.message : "Intenta nuevamente.",
-        variant: "destructive",
-      })
-    } finally {
-      setIsSubmitting(false)
-    }
+    })
   }
 
   return (
@@ -195,10 +187,10 @@ export function ContactSection() {
                 <Button
                   type="submit"
                   size="lg"
-                  disabled={isSubmitting}
+                  disabled={isPending}
                   className="motion-safe-lift w-full sm:w-auto"
                 >
-                  {isSubmitting ? "Enviando..." : "Solicitar conversación"}
+                  {isPending ? "Enviando..." : "Solicitar conversación"}
                 </Button>
               </div>
             </form>

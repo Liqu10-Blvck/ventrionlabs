@@ -1,24 +1,32 @@
 import type { Metadata } from "next"
 import { SitePageShell } from "@/components/site-page-shell"
+import { type Locale } from "@/lib/i18n"
 
-export const metadata: Metadata = {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  return {
   title: "Privacidad",
   description:
     "Política de privacidad del sitio de Ventrion Labs respecto de los datos enviados a través del formulario de contacto.",
   alternates: {
-    canonical: "/privacidad",
+    canonical: `/${locale}/privacidad`,
   },
   openGraph: {
     title: "Privacidad | Ventrion Labs",
     description:
       "Política de privacidad del sitio de Ventrion Labs respecto de los datos enviados a través del formulario de contacto.",
-    url: "/privacidad",
+    url: `/${locale}/privacidad`,
   },
 }
 
-export default function PrivacidadPage() {
+}
+
+export default async function PrivacidadPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+
   return (
     <SitePageShell
+      locale={locale as Locale}
       eyebrow="Legal"
       title="Política de privacidad del sitio"
       description="Esta política aplica al uso del sitio web de Ventrion Labs y, en particular, a la información que una persona envía voluntariamente mediante el formulario de contacto."
