@@ -27,6 +27,7 @@ export async function SitePageShell({
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Navbar
+        locale={locale}
         ctaLabel={dict.navbar.cta}
         navLinks={dict.navbar.links}
         themeLabel={dict.navbar.theme}

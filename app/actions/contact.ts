@@ -1,6 +1,7 @@
 "use server"
 
 import { z } from "zod"
+import { env } from "@/lib/env"
 
 const contactSchema = z.object({
   fullName: z.string().min(2),
@@ -11,10 +12,9 @@ const contactSchema = z.object({
 
 function getContactMailConfig() {
   return {
-    apiKey: process.env.RESEND_API_KEY?.trim(),
-    fromEmail:
-      process.env.CONTACT_FROM_EMAIL?.trim() || "Ventrion Labs <onboarding@resend.dev>",
-    toEmail: process.env.CONTACT_TO_EMAIL?.trim(),
+    apiKey: env.RESEND_API_KEY,
+    fromEmail: env.CONTACT_FROM_EMAIL,
+    toEmail: env.CONTACT_TO_EMAIL,
   }
 }
 

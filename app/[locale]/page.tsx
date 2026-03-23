@@ -117,36 +117,37 @@ export default async function LocalizedHome({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       <Navbar
+        locale={locale}
         ctaLabel={dict.navbar.cta}
         navLinks={dict.navbar.links}
         themeLabel={dict.navbar.theme}
       />
       <main>
-        <AnimatedSection animationClassName="animate-fade-in">
+        <AnimatedSection as="section" animationClassName="animate-fade-in">
           <HeroSection {...dict.hero} />
         </AnimatedSection>
 
-        <AnimatedSection>
+        <AnimatedSection as="section">
           <WhatWeDoSection {...dict.whatWeBuild} />
         </AnimatedSection>
 
-        <AnimatedSection>
+        <AnimatedSection as="section">
           <ProblemsSection {...dict.problem} />
         </AnimatedSection>
 
-        <AnimatedSection>
+        <AnimatedSection as="section">
           <HowWeWorkSection {...dict.process} />
         </AnimatedSection>
 
-        <AnimatedSection>
+        <AnimatedSection as="section">
           <TechnologySection {...dict.technology} />
         </AnimatedSection>
 
-        <AnimatedSection>
+        <AnimatedSection as="section">
           <ProductsSection locale={locale} copy={dict.products} />
         </AnimatedSection>
 
-        <AnimatedSection>
+        <AnimatedSection as="section">
           <TrustSection
             eyebrow={dict.whyVentrion.eyebrow}
             title={dict.whyVentrion.title}
@@ -155,7 +156,7 @@ export default async function LocalizedHome({ params }: PageProps) {
           />
         </AnimatedSection>
 
-        <AnimatedSection>
+        <AnimatedSection as="section">
           <FinalCtaSection {...dict.cta} />
         </AnimatedSection>
       </main>

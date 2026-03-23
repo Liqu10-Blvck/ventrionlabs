@@ -52,10 +52,10 @@ export function Footer({
     {
       title: copy.sections,
       links: [
-        { label: copy.build, href: "#soluciones" },
-        { label: copy.problem, href: "#problema" },
-        { label: copy.products, href: "#productos" },
-        { label: copy.technology, href: "#tecnologia" },
+        { label: copy.build, href: withLocalePath(locale, "#soluciones") },
+        { label: copy.problem, href: withLocalePath(locale, "#problema") },
+        { label: copy.products, href: withLocalePath(locale, "#productos") },
+        { label: copy.technology, href: withLocalePath(locale, "#tecnologia") },
       ],
     },
     {

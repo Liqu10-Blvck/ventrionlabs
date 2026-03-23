@@ -18,7 +18,7 @@ export function withLocalePath(locale: Locale, path: string) {
     return path
   }
   if (path === "#") return `${getLocalePrefix(locale)}#`
-  if (path.startsWith("#")) return `${getLocalePrefix(locale)}/${path}`
+  if (path.startsWith("#")) return `${getLocalePrefix(locale)}${path}`
   if (path === "/") return getLocalePrefix(locale)
   return `${getLocalePrefix(locale)}${path}`
 }

@@ -633,9 +633,10 @@ export const landingDictionaries: Record<Locale, Dictionary> = {
   },
 }
 
+import { env } from "@/lib/env"
+
 export async function getLandingDictionary(locale: Locale): Promise<Dictionary> {
-  // Configured to be able to fetch dictionary content from an external source (e.g. Headless CMS)
-  const cmsBase = process.env.CMS_CONTENT_URL
+  const cmsBase = env.CMS_CONTENT_URL
   
   if (cmsBase) {
     try {

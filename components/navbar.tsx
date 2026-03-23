@@ -6,8 +6,10 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Menu, X } from "lucide-react"
+import { withLocalePath, type Locale } from "@/lib/i18n"
 
 type NavbarProps = {
+  locale: Locale
   ctaLabel: string
   navLinks: Array<{ label: string; href: string }>
   themeLabel: string
@@ -21,6 +23,7 @@ const defaultNavLinks = [
 ]
 
 export function Navbar({
+  locale = "es-cl",
   ctaLabel = "Contactar",
   navLinks = defaultNavLinks,
   themeLabel = "Tema",
@@ -30,7 +33,7 @@ export function Navbar({
   return (
     <header className="fixed top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur-xl">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-6">
-        <Link href="/" className="flex items-center">
+        <Link href={withLocalePath(locale, "/")} className="flex items-center">
           <Image
             src="/ventrionlabsblack.png"
             alt="Ventrion Labs"
@@ -55,7 +58,7 @@ export function Navbar({
           {navLinks.map((link) => (
             <a
               key={link.label}
-              href={link.href}
+              href={withLocalePath(locale, link.href)}
               className="text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
               {link.label}
@@ -66,7 +69,7 @@ export function Navbar({
         <div className="hidden items-center gap-3 md:flex">
           <ThemeToggle />
           <Button size="sm" asChild>
-            <a href="#contacto">{ctaLabel}</a>
+            <a href={withLocalePath(locale, "#contacto")}>{ctaLabel}</a>
           </Button>
         </div>
 
@@ -89,7 +92,7 @@ export function Navbar({
             {navLinks.map((link) => (
               <a
                 key={link.label}
-                href={link.href}
+                href={withLocalePath(locale, link.href)}
                 onClick={() => setMobileOpen(false)}
                 className="rounded-md py-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
@@ -102,7 +105,7 @@ export function Navbar({
             </div>
             <div className="flex flex-col gap-2 pt-2">
               <Button size="sm" className="w-full" asChild>
-                <a href="#contacto">{ctaLabel}</a>
+                <a href={withLocalePath(locale, "#contacto")}>{ctaLabel}</a>
               </Button>
             </div>
           </div>
