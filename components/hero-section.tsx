@@ -6,7 +6,6 @@ type HeroSectionProps = {
   title: string
   description: string
   primaryCta: string
-  secondaryCta: string
   highlights: string[]
   panelTitle: string
   panelSubtitle: string
@@ -23,7 +22,6 @@ export function HeroSection({
   title,
   description,
   primaryCta,
-  secondaryCta,
   highlights,
   panelTitle,
   panelSubtitle,
@@ -69,9 +67,6 @@ export function HeroSection({
                 {primaryCta}
                 <ArrowRight className="ml-2 size-4" />
               </a>
-            </Button>
-            <Button variant="outline" size="lg" className="motion-safe-lift w-full border-border bg-card/60 px-8 text-foreground hover:bg-secondary sm:w-auto dark:border-white/10 dark:bg-white/3 dark:text-white dark:hover:bg-white/6" asChild>
-              <a href="#productos">{secondaryCta}</a>
             </Button>
             </div>
 

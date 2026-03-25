@@ -5,7 +5,7 @@ import { HeroSection } from "@/components/hero-section"
 import { ProblemsSection } from "@/components/problems-section"
 import { WhatWeDoSection } from "@/components/what-we-do-section"
 import { HowWeWorkSection } from "@/components/how-we-work-section"
-import { ProductsSection } from "@/components/products-section"
+
 import { TrustSection } from "@/components/trust-section"
 import { TechnologySection } from "@/components/technology-section"
 import { FinalCtaSection } from "@/components/final-cta-section"
@@ -143,9 +143,7 @@ export default async function LocalizedHome({ params }: PageProps) {
           <TechnologySection {...dict.technology} />
         </AnimatedSection>
 
-        <AnimatedSection as="section">
-          <ProductsSection locale={locale} copy={dict.products} />
-        </AnimatedSection>
+
 
         <AnimatedSection as="section">
           <TrustSection

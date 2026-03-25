@@ -17,7 +17,6 @@ type Dictionary = {
     title: string
     description: string
     primaryCta: string
-    secondaryCta: string
     highlights: string[]
     panelTitle: string
     panelSubtitle: string
@@ -56,23 +55,6 @@ type Dictionary = {
     signals: string[]
     visualLabel: string
   }
-  products: {
-    eyebrow: string
-    title: string
-    description: string
-    audiences: Record<string, string>
-    summaries: Record<string, string>
-    useCases: Record<string, string>
-    verticalSolution: string
-    fallbackSummary: string
-    fallbackDescription: string
-    fallbackUseCase: string
-    startingAt: string
-    configuration: string
-    optionsLabel: (count: number) => string
-    capabilitiesLabel: string
-    requestDemo: string
-  }
   whyVentrion: {
     eyebrow: string
     title: string
@@ -84,7 +66,6 @@ type Dictionary = {
     title: string
     description: string
     primaryCta: string
-    secondaryCta: string
   }
   footer: {
     company: string
@@ -94,7 +75,7 @@ type Dictionary = {
     philosophy: string
     build: string
     problem: string
-    products: string
+
     technology: string
     privacy: string
     terms: string
@@ -117,7 +98,7 @@ export const landingDictionaries: Record<Locale, Dictionary> = {
       links: [
         { label: "Qué construimos", href: "#soluciones" },
         { label: "Problema", href: "#problema" },
-        { label: "Productos", href: "#productos" },
+
         { label: "Proceso", href: "#proceso" },
         { label: "Tecnología", href: "#tecnologia" },
         { label: "Por qué Ventrion", href: "#why-ventrion" },
@@ -132,7 +113,7 @@ export const landingDictionaries: Record<Locale, Dictionary> = {
       description:
         "Ventrion Labs diseña productos, sistemas internos y software de negocio para equipos que necesitan mejores flujos, datos más limpios y una base tecnológica confiable.",
       primaryCta: "Agendar llamada",
-      secondaryCta: "Ver productos",
+
       highlights: [
         "Ejecución técnica con criterio",
         "Sistemas operacionales con ownership claro",
@@ -168,11 +149,7 @@ export const landingDictionaries: Record<Locale, Dictionary> = {
           description:
             "Reducimos trabajo manual y errores con automatizaciones pensadas para operar de forma confiable en escenarios reales.",
         },
-        {
-          title: "Productos verticales",
-          description:
-            "Ofrecemos productos listos para usar orientados a industrias y necesidades recurrentes, con foco en adopción rápida y orden operativo.",
-        },
+
       ],
     },
     problem: {
@@ -284,36 +261,6 @@ export const landingDictionaries: Record<Locale, Dictionary> = {
       ],
       visualLabel: "Sistema visual",
     },
-    products: {
-      eyebrow: "Productos",
-      title: "Tarjetas de producto diseñadas como ofertas de software modernas, no como fichas estáticas.",
-      description:
-        "Cada producto se presenta en torno a un flujo real, un tipo de equipo y un resultado operacional claro.",
-      audiences: {
-        fruitpos: "Retail y comercio",
-        barberos: "Servicios y agenda",
-        educontrol: "Educación y control interno",
-      },
-      summaries: {
-        fruitpos: "Ordena ventas, catálogo, inventario y operación diaria desde un solo sistema.",
-        barberos: "Centraliza reservas, atención, operación del servicio e historial de clientes.",
-        educontrol: "Mejora control administrativo, procesos internos y visibilidad sobre información crítica.",
-      },
-      useCases: {
-        fruitpos: "Ideal para puntos de venta que necesitan más control sobre caja, inventario y ejecución diaria.",
-        barberos: "Ideal para negocios con reservas, atención recurrente y gestión de clientes.",
-        educontrol: "Ideal para instituciones que requieren control administrativo y trazabilidad interna.",
-      },
-      verticalSolution: "Solución vertical",
-      fallbackSummary: "Producto diseñado para resolver procesos críticos con más orden y trazabilidad.",
-      fallbackDescription: "Esta solución puede configurarse según la necesidad operativa del negocio.",
-      fallbackUseCase: "Ideal para equipos que necesitan más control, trazabilidad y estandarización.",
-      startingAt: "Desde",
-      configuration: "Configuración",
-      optionsLabel: (count) => `${count} alternativas`,
-      capabilitiesLabel: "Capacidades clave",
-      requestDemo: "Solicitar demo",
-    },
     whyVentrion: {
       eyebrow: "Por qué Ventrion",
       title: "Mentalidad moderna de producto con la disciplina que exige el software operacional real.",
@@ -348,7 +295,7 @@ export const landingDictionaries: Record<Locale, Dictionary> = {
       description:
         "Si tu equipo ya superó planillas, herramientas fragmentadas o flujos internos frágiles, podemos ayudarte a definir qué producto, sistema o plataforma construir.",
       primaryCta: "Agendar llamada",
-      secondaryCta: "Explorar productos",
+
     },
     footer: {
       company: "Empresa",
@@ -358,7 +305,7 @@ export const landingDictionaries: Record<Locale, Dictionary> = {
       philosophy: "Filosofía",
       build: "Qué construimos",
       problem: "Problema",
-      products: "Productos",
+
       technology: "Tecnología",
       privacy: "Privacidad",
       terms: "Términos",
@@ -380,7 +327,7 @@ export const landingDictionaries: Record<Locale, Dictionary> = {
       links: [
         { label: "What we build", href: "#soluciones" },
         { label: "Problem", href: "#problema" },
-        { label: "Products", href: "#productos" },
+
         { label: "Process", href: "#proceso" },
         { label: "Technology", href: "#tecnologia" },
         { label: "Why Ventrion", href: "#why-ventrion" },
@@ -395,7 +342,7 @@ export const landingDictionaries: Record<Locale, Dictionary> = {
       description:
         "Ventrion Labs designs products, internal tools and business systems for teams that need better workflows, cleaner data and a more reliable software foundation.",
       primaryCta: "Book intro call",
-      secondaryCta: "See products",
+
       highlights: [
         "Developer-grade execution",
         "Operational systems with clear ownership",
@@ -431,11 +378,7 @@ export const landingDictionaries: Record<Locale, Dictionary> = {
           description:
             "We reduce manual work and operational errors with automations designed to run reliably in real environments.",
         },
-        {
-          title: "Vertical products",
-          description:
-            "We offer ready-to-use products built around recurring industry needs, fast adoption and operational order.",
-        },
+
       ],
     },
     problem: {
@@ -547,36 +490,6 @@ export const landingDictionaries: Record<Locale, Dictionary> = {
       ],
       visualLabel: "Visual system",
     },
-    products: {
-      eyebrow: "Products",
-      title: "Product cards designed like modern software offerings, not static brochures.",
-      description:
-        "Each product is positioned around a real workflow, a target team and a clear operational outcome.",
-      audiences: {
-        fruitpos: "Retail and commerce",
-        barberos: "Services and scheduling",
-        educontrol: "Education and internal control",
-      },
-      summaries: {
-        fruitpos: "Unify sales, catalog, inventory and daily operations inside one system.",
-        barberos: "Centralize bookings, customer flow, service operations and client history.",
-        educontrol: "Improve administrative control, internal workflows and visibility over critical information.",
-      },
-      useCases: {
-        fruitpos: "Ideal for points of sale that need better control over checkout, inventory and daily execution.",
-        barberos: "Ideal for businesses with booking workflows, recurring service and customer management.",
-        educontrol: "Ideal for institutions that require administrative control and internal traceability.",
-      },
-      verticalSolution: "Vertical solution",
-      fallbackSummary: "A product designed to solve critical workflows with more order and better traceability.",
-      fallbackDescription: "This solution can be configured around the operational needs of the business.",
-      fallbackUseCase: "Ideal for teams that need more control, traceability and standardization.",
-      startingAt: "Starting at",
-      configuration: "Configuration",
-      optionsLabel: (count) => `${count} options`,
-      capabilitiesLabel: "Key capabilities",
-      requestDemo: "Request demo",
-    },
     whyVentrion: {
       eyebrow: "Why Ventrion",
       title: "A modern product mindset with the discipline required for real operational software.",
@@ -611,7 +524,7 @@ export const landingDictionaries: Record<Locale, Dictionary> = {
       description:
         "If your team is outgrowing spreadsheets, fragmented tools or brittle internal workflows, we can help define the right product, system or platform to build next.",
       primaryCta: "Book intro call",
-      secondaryCta: "Explore products",
+
     },
     footer: {
       company: "Company",
@@ -621,7 +534,7 @@ export const landingDictionaries: Record<Locale, Dictionary> = {
       philosophy: "Philosophy",
       build: "What we build",
       problem: "Problem",
-      products: "Products",
+
       technology: "Technology",
       privacy: "Privacy",
       terms: "Terms",

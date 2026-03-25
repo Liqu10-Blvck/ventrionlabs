@@ -5,10 +5,9 @@ type FinalCtaSectionProps = {
   title: string
   description: string
   primaryCta: string
-  secondaryCta: string
 }
 
-export function FinalCtaSection({ eyebrow, title, description, primaryCta, secondaryCta }: FinalCtaSectionProps) {
+export function FinalCtaSection({ eyebrow, title, description, primaryCta }: FinalCtaSectionProps) {
   return (
     <section id="contacto" className="px-6 py-20 sm:py-24 md:py-32">
       <div className="mx-auto max-w-4xl">
@@ -31,14 +30,7 @@ export function FinalCtaSection({ eyebrow, title, description, primaryCta, secon
             >
               <a href="mailto:contacto@ventrionlabs.cl">{primaryCta}</a>
             </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="motion-safe-lift w-full border-border bg-transparent text-foreground hover:bg-secondary hover:text-foreground active:scale-[0.98] transition-transform dark:border-white/10 dark:text-white dark:hover:bg-white/10 dark:hover:text-white sm:w-auto"
-              asChild
-            >
-              <a href="#productos">{secondaryCta}</a>
-            </Button>
+
           </div>
         </div>
       </div>

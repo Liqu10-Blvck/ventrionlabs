@@ -10,7 +10,6 @@ type FooterCopy = {
   philosophy: string
   build: string
   problem: string
-  products: string
   technology: string
   privacy: string
   terms: string
@@ -27,7 +26,6 @@ const defaultFooterCopy: FooterCopy = {
   philosophy: "Filosofía",
   build: "Qué construimos",
   problem: "Problema",
-  products: "Productos",
   technology: "Tecnología",
   privacy: "Privacidad",
   terms: "Términos",
@@ -54,7 +52,6 @@ export function Footer({
       links: [
         { label: copy.build, href: withLocalePath(locale, "#soluciones") },
         { label: copy.problem, href: withLocalePath(locale, "#problema") },
-        { label: copy.products, href: withLocalePath(locale, "#productos") },
         { label: copy.technology, href: withLocalePath(locale, "#tecnologia") },
       ],
     },

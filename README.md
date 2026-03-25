@@ -38,7 +38,6 @@ La página principal reúne las secciones clave de la propuesta:
 - enfoque y soluciones
 - visión y valores
 - proceso de trabajo
-- productos
 - llamado a la acción
 - formulario de contacto
 
